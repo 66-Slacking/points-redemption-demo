@@ -5,8 +5,10 @@ import { Client } from 'pg';
 import { passwordHash } from '../src/app';
 
 async function main() {
-  if (!process.env.DATABASE_URL) throw new Error('请先在 .env 中设置 DATABASE_URL');
-  const client = new Client({ connectionString: process.env.DATABASE_URL });
+  const testMode = process.argv.includes('--test');
+  const databaseUrl = testMode ? process.env.TEST_DATABASE_URL : process.env.DATABASE_URL;
+  if (!databaseUrl) throw new Error(`请先在 .env 中设置 ${testMode ? 'TEST_DATABASE_URL' : 'DATABASE_URL'}`);
+  const client = new Client({ connectionString: databaseUrl });
   await client.connect();
   try {
     const sql = await readFile(resolve('sql/schema.sql'), 'utf8');

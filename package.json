@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "setup": "npm run build && node dist/scripts/setup.js",
+    "setup:test": "npm run build && node dist/scripts/setup.js --test",
     "dev": "npm run build && node dist/src/server.js",
     "build": "tsc",
     "start": "node dist/src/server.js",

@@ -3,3 +3,5 @@ dist/
 .env
 *.log
 postgresql-*.zip
+教学资料/
+代码逐行讲解.md
